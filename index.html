@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лабораторная работа 2</title>
     <style>
+        /* Mobile First стили (для смартфонов) */
+        
         /* Общие стили */
         * {
             margin: 0;
@@ -19,10 +21,11 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            width: 100%; /* Занимает 100% ширины экрана */
         }
 
         .container {
-            max-width: 960px;
+            width: 100%; /* На мобильных 100% ширины */
             margin: 0 auto;
             padding: 0 15px;
         }
@@ -37,14 +40,14 @@
 
         .header-content {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            flex-direction: column; /* Вертикальное расположение на мобильных */
+            align-items: flex-start;
         }
 
         .logo-title {
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
         }
 
         .logo {
@@ -65,13 +68,16 @@
             color: white;
         }
 
+        /* Навигация - вертикальный список на мобильных */
         nav ul {
             list-style: none;
             display: flex;
+            flex-direction: column; /* Вертикальный список */
+            width: 100%;
         }
 
         nav ul li {
-            margin-left: 20px;
+            margin: 5px 0;
         }
 
         nav ul li a {
@@ -81,16 +87,33 @@
             padding: 5px 10px;
             border-radius: 4px;
             transition: background-color 0.3s;
+            display: block;
+            width: 100%;
         }
 
         nav ul li a:hover {
             background-color: #3498db;
         }
 
-        /* Стили основного контента */
+        /* Основной контент с Flex Box и изменением порядка */
         main {
             flex: 1;
             padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Изменение порядка: таблица выше списка ссылок на мобильных */
+        #table {
+            order: 1; /* Таблица будет первой */
+        }
+        
+        #links {
+            order: 2; /* Список ссылок будет вторым */
+        }
+        
+        #form {
+            order: 3; /* Форма будет третьей */
         }
 
         section {
@@ -99,6 +122,7 @@
             background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%; /* Занимает 100% ширины */
         }
 
         h1, h2 {
@@ -153,6 +177,7 @@
         /* Стили формы */
         form {
             max-width: 600px;
+            width: 100%;
         }
 
         label {
@@ -221,25 +246,42 @@
             text-align: center;
         }
 
-        /* Адаптивность */
-        @media (max-width: 768px) {
+        /* Media Query для планшетов и десктопов (min-width: 768px) */
+        @media screen and (min-width: 768px) {
+            .container {
+                max-width: 960px; /* Ограничение ширины для больших экранов */
+            }
+            
             .header-content {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row; /* Горизонтальное расположение */
+                align-items: center;
+                justify-content: space-between;
             }
             
             .logo-title {
-                margin-bottom: 15px;
+                margin-bottom: 0; /* Убираем отступ на больших экранах */
             }
             
             nav ul {
-                flex-direction: column;
-                width: 100%;
+                flex-direction: row; /* Горизонтальное меню */
+                width: auto;
             }
             
             nav ul li {
-                margin: 5px 0;
-                margin-left: 0;
+                margin: 0 0 0 20px;
+            }
+            
+            /* Восстанавливаем исходный порядок элементов на больших экранах */
+            #links {
+                order: 0; /* Список ссылок возвращается на первое место */
+            }
+            
+            #table {
+                order: 0; /* Таблица возвращается на второе место */
+            }
+            
+            #form {
+                order: 0; /* Форма возвращается на третье место */
             }
         }
     </style>
